@@ -99,6 +99,12 @@ class File
         return $this->result(["/", 0, "文件名创建成功"]);
     }
 
+    /**
+     * 查看文件
+     * @Author   hflxhn.com
+     * @DateTime 2020-06-29T16:47:24+0800
+     * @param    array                    $data [文件信息]
+     */
     public function showContent($data = [])
     {
         $path_file_name = $data['path'] . $data['file_name'];
@@ -107,8 +113,27 @@ class File
         if (!strlen($content)) {
             return $this->result(["error", 1, "该文件内容为空"]);
         }
-        $content = highlight_string($content, true);
-        return $this->result([$content, 0, "文件名创建成功"]);
+        return $this->result([$content, 0, "success"]);
+    }
+
+    public function editContent($data = [])
+    {
+        $path_file_name = $data['path'] . $data['file_name'];
+        $content        = file_get_contents($path_file_name);
+
+        return $this->result([$content, 0, "success"]);
+    }
+
+    public function saveContent($data = [])
+    {
+        $path_file_name = $data['path'] . $data['file_name'];
+
+        $result = file_put_contents($path_file_name, $data['content']);
+
+        if (!$result) {
+            return $this->result(["error", 1, "文件修改失败"]);
+        }
+        return $this->result(["/", 0, "文件修改成功"]);
     }
 
     // 返回函数
