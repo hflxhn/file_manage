@@ -23,7 +23,7 @@ $files = $file->getAllFiles($path);
             <button type="button" class="btn btn-default" title="返回上一级">
                 <span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>
             </button>
-            <button type="button" class="btn btn-default" title="新建文件" data-toggle="modal" data-target="#myModal">
+            <button type="button" class="btn btn-default" title="新建文件" data-toggle="modal" data-target="#create-file">
                 <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
             </button>
             <button type="button" class="btn btn-default" title="新建文件夹">
@@ -38,7 +38,7 @@ $files = $file->getAllFiles($path);
         </div>
         <hr>
 
-        <table class='table table-striped table-bordered table-hover table-condensed'>
+        <table class='table table-striped table-bordered table-hover table-condensed file-btn'>
             <tr>
                 <th>文件名</th>
                 <th>类型</th>
@@ -68,9 +68,10 @@ if ($files['file']) {
         echo "<td>" . date("Y-m-d H:i:s", filemtime($path)) . "</td>";
         echo "<td>" . date("Y-m-d H:i:s", fileatime($path)) . "</td>";
         echo "<td>";
+        // url="/file.php?act=show_content&path=' . $path . '&file_name=' . $value . '"
         echo '
         <div class="btn-group btn-group-xs" role="group">
-            <button type="button" class="btn btn-info" title="查看">
+            <button type="button" data-act="show_content" data-path="' . $path . '" data-file-name="' . $value . '" class="btn btn-info" title="查看">
                 <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
             </button>
             <button type="button" class="btn btn-primary" title="修改">
@@ -99,7 +100,7 @@ if ($files['file']) {
     </div>
 
 <!-- create file -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="create-file" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -120,6 +121,21 @@ if ($files['file']) {
                     <button type="submit" class="btn btn-primary">保存</button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+<!-- show content -->
+<div class="modal fade" id="show-content" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">查看文件内容</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert-danger file-content">&lt;p&gt;Sample text here...&lt;/p&gt;</div>
+            </div>
         </div>
     </div>
 </div>

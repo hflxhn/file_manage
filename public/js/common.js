@@ -44,4 +44,39 @@
             formValidata.successAjax(form, form.getAttribute('ajax-url'));
         });
     }
+
+    // 操作文件
+    var file_group = document.getElementsByClassName('file-btn')[0];
+    addEvent(file_group, 'click', function(e){
+        var event = e || window.event,
+            target = event.target || event.srcElement,
+            tag_name = target.tagName.toLowerCase();
+
+        if (tag_name == 'span') {
+            target = retParent(target, 1);
+        }
+        
+        var data = JSON.stringify({
+            "act": target.dataset.act,
+            "path": target.dataset.path,
+            "file_name": target.dataset.fileName,
+        }),
+        url = '/file.php';
+
+        loadData({
+            url: url,
+            success: function (result) {
+                if (result.code == 0) {
+                    var file_content = document.getElementsByClassName('file-content')[0];
+                    file_content.innerHTML = result.data;
+                    $('#show-content').modal('show');
+                }else{
+                    layer.msg(result.msg, {icon: 2});
+                }
+            },
+            params: data
+        });
+        
+    });
+    
 }());

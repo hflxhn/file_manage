@@ -173,6 +173,15 @@ function getStyle(elem, prop) {
     }
 }
 
+// 返回父级元素
+function retParent(elem, n = 0) {
+    while(elem && n) {
+        elem = elem.parentElement;
+        n--;
+    }
+    return elem;
+}
+
 /**
  * 封装事件处理函数
  * 解决兼容性问题

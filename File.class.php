@@ -99,6 +99,18 @@ class File
         return $this->result(["/", 0, "文件名创建成功"]);
     }
 
+    public function showContent($data = [])
+    {
+        $path_file_name = $data['path'] . $data['file_name'];
+        $content        = file_get_contents($path_file_name);
+
+        if (!strlen($content)) {
+            return $this->result(["error", 1, "该文件内容为空"]);
+        }
+        $content = highlight_string($content, true);
+        return $this->result([$content, 0, "文件名创建成功"]);
+    }
+
     // 返回函数
     protected function result($data = [])
     {
