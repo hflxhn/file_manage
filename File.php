@@ -7,9 +7,7 @@ class File
 {
 
     public function __construct()
-    {
-        # code...
-    }
+    {}
 
     /**
      * get all file
@@ -73,5 +71,43 @@ class File
         }
 
         return round($size, 2) . " " . $arr[$tmp];
+    }
+
+    /**
+     * create file
+     * @Author   hflxhn.com
+     * @DateTime 2020-06-29T11:24:38+0800
+     * @param    array                    $data [文件信息]
+     */
+    public function createFile($data = [])
+    {
+        // 验证文件名是否合法
+        $pattern = "/[\/,\*,<>,\?,\|]/";
+        if (preg_match($pattern, $data['file_name'])) {
+            return $this->result(["error", 1, "非法文件名"]);
+        }
+
+        // 检测当前目录是否存在同名文件
+        if (file_exists($data['path'] . $data['file_name'])) {
+            return $this->result(["error", 1, "文件名已存在,请重命名后上传"]);
+        }
+
+        // 开始创建文件
+        if (!touch($data['path'] . $data['file_name'])) {
+            return $this->result(["error", 1, "文件名创建失败"]);
+        }
+        return $this->result(["/", 0, "文件名创建成功"]);
+    }
+
+    // 返回函数
+    protected function result($data = [])
+    {
+        $data = [
+            'data' => $data[0],
+            'code' => $data[1],
+            'msg'  => $data[2],
+            'time' => time(),
+        ];
+        return json_encode($data, JSON_UNESCAPED_UNICODE);
     }
 }

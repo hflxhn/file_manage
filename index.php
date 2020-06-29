@@ -4,7 +4,7 @@ include 'File.php';
 
 $file = new File();
 
-$path  = 'file';
+$path  = 'file/';
 $files = $file->getAllFiles($path);
 
 ?>
@@ -106,17 +106,18 @@ if ($files['file']) {
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">创建文件</h4>
             </div>
-            <form action="">
+            <form  action="javascript:;" ajax-url='/Save.php' class="form-validate" autocomplete="off">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="exampleInputEmail1">文件名称</label>
                         <input type="text" name="file_name" class="form-control" id="exampleInputEmail1" placeholder="文件名称">
                         <input type="hidden" name="path" value="<?php echo $path; ?>">
+                        <input type="hidden" name="act" value="create_file">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary">保存</button>
+                    <button type="submit" class="btn btn-primary">保存</button>
                 </div>
             </form>
         </div>
@@ -125,5 +126,8 @@ if ($files['file']) {
 
 </body>
 <script src="/public/bs/js/jquery.min.js"></script>
+<script src="/public/layer/layer.js"></script>
 <script src="/public/bs/js/bootstrap.js"></script>
+<script src="/public/js/tools.js"></script>
+<script src="/public/js/common.js"></script>
 </html>
