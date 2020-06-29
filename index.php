@@ -4,7 +4,7 @@ include 'File.php';
 
 $file = new File();
 
-$path  = 'public';
+$path  = 'file';
 $files = $file->getAllFiles($path);
 
 ?>

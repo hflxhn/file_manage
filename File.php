@@ -23,6 +23,7 @@ class File
         // open fils
         $handle = opendir($path);
 
+        $arr = [];
         while (($item = readdir($handle)) !== false) {
             // filter . and ..
             if ($item != '.' && $item != '..') {
@@ -37,6 +38,13 @@ class File
 
         // close files
         closedir($handle);
+
+        if (!array_key_exists('file', $arr)) {
+            $arr['file'] = [];
+        }
+        if (!array_key_exists('dir', $arr)) {
+            $arr['dir'] = [];
+        }
 
         return $arr;
     }
