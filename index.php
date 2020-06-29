@@ -1,6 +1,6 @@
 <?php
 
-include 'File.php';
+include 'File.class.php';
 
 $file = new File();
 
@@ -106,7 +106,7 @@ if ($files['file']) {
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">创建文件</h4>
             </div>
-            <form  action="javascript:;" ajax-url='/Save.php' class="form-validate" autocomplete="off">
+            <form  action="javascript:;" ajax-url='/file.php' class="form-validate" autocomplete="off">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="exampleInputEmail1">文件名称</label>

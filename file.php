@@ -1,7 +1,6 @@
 <?php
-header('Content-Type:text/json;charset=utf-8');
 
-include 'File.php';
+include 'File.class.php';
 $file = new File();
 
 $data = $_POST;
