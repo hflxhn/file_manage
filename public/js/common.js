@@ -95,6 +95,12 @@
                     },
                     params: JSON.stringify(data)
                 });
+            case 'rename_file':
+                var new_file_name = document.getElementsByName('new_file_name')[0],
+                file_name = document.getElementsByName('file_name')[2];
+                new_file_name.value = '';
+                file_name.value = data.file_name;
+                $('#rename-file').modal('show');
         }
         
     });

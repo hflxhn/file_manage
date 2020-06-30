@@ -26,6 +26,10 @@ switch ($data['act']) {
         $content = $file->saveContent($data);
         echo $content;
         break;
+    case 'rename_file':
+        $content = $file->renameFile($data);
+        echo $content;
+        break;
 
     default:
         # code...

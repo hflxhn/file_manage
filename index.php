@@ -74,10 +74,10 @@ if ($files['file']) {
             <button type="button" data-act="show_content" data-path="' . $path . '" data-file-name="' . $value . '" class="btn btn-info" title="查看">
                 <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
             </button>
-            <button type="button" data-act="edit_content" data-path="' . $path . '" data-file-name="' . $value . '"  class="btn btn-primary" title="修改">
+            <button type="button" data-act="edit_content" data-path="' . $path . '" data-file-name="' . $value . '" class="btn btn-primary" title="修改">
                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
             </button>
-            <button type="button" class="btn btn-warning" title="重命名">
+            <button type="button" data-act="rename_file" data-path="' . $path . '" data-file-name="' . $value . '" class="btn btn-warning" title="重命名">
                 <span class="glyphicon glyphicon-object-align-bottom" aria-hidden="true"></span>
             </button>
             <button type="button" class="btn btn-info" title="复制">
@@ -156,6 +156,33 @@ if ($files['file']) {
                         <input type="hidden" name="path" value="<?php echo $path; ?>">
                         <input type="hidden" name="file_name">
                         <input type="hidden" name="act" value="save_file">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="submit" class="btn btn-primary">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- rename file -->
+<div class="modal fade" id="rename-file" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">重命名文件</h4>
+            </div>
+            <form  action="javascript:;" ajax-url='/file.php' class="form-validate" autocomplete="off">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">新的文件名</label>
+                        <input type="text" name="new_file_name" class="form-control" id="exampleInputEmail1" placeholder="文件名称">
+                        <input type="hidden" name="file_name">
+                        <input type="hidden" name="path" value="<?php echo $path; ?>">
+                        <input type="hidden" name="act" value="rename_file">
                     </div>
                 </div>
                 <div class="modal-footer">
