@@ -89,6 +89,9 @@ if ($files['file']) {
             <button type="button" data-act="del_file" data-path="' . $path . '" data-file-name="' . $value . '" class="btn btn-danger" title="删除">
                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
             </button>
+            <a href="file.php?act=down_file&path=' . $path . '&file_name=' . $value . '" class="btn btn-success" title="下载">
+                <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+            </a>
         </div>';
         echo "</td>";
 

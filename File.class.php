@@ -155,6 +155,32 @@ class File
         return $this->result(["/", 0, "文件删除成功"]);
     }
 
+    // 下载文件
+    public function downFile($data = [])
+    {
+        // //文件类型是二进制流。设置为utf8编码（支持中文文件名称）
+        // header('Content-type:application/octet-stream; charset=utf-8');
+        // header("Content-Transfer-Encoding: binary");
+        // header("Accept-Ranges: bytes");
+
+        // //文件大小
+        // header("Content-Length: " . filesize($data['path'] . $data['file_name']));
+        // //触发浏览器文件下载功能
+        // header('Content-Disposition:attachment;filename="' . $data['file_name'] . '"');
+
+        // ob_clean();
+        // ob_end_flush();
+        // $handle = fopen($data['path'] . $data['file_name'], "rb");
+        // while (!feof($handle)) {
+        //     echo fread($handle, 1000);
+        // }
+
+        header("content-disposition: attachment;filename=" . $data['file_name']);
+        header("content-length:" . filesize($data['path'] . $data['file_name']));
+
+        readfile($data['path'] . $data['file_name']);
+    }
+
     // 验证文件名是否合法
     public function checkFileName($filename = '')
     {

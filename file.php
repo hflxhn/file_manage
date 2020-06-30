@@ -34,6 +34,9 @@ switch ($data['act']) {
         $content = $file->delFile($data);
         echo $content;
         break;
+    case 'down_file':
+        $file->downFile($data);
+        break;
 
     default:
         # code...

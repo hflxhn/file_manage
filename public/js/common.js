@@ -105,6 +105,7 @@
                 var file_name = document.getElementsByName('file_name')[3];
                 file_name.value = data.file_name;
                 $('#del-file').modal('show');
+            
         }
         
     });
