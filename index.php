@@ -86,7 +86,7 @@ if ($files['file']) {
             <button type="button" class="btn btn-warning" title="剪贴">
                 <span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>
             </button>
-            <button type="button" class="btn btn-danger" title="删除">
+            <button type="button" data-act="del_file" data-path="' . $path . '" data-file-name="' . $value . '" class="btn btn-danger" title="删除">
                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
             </button>
         </div>';
@@ -188,6 +188,27 @@ if ($files['file']) {
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                     <button type="submit" class="btn btn-primary">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- del file -->
+<div class="modal fade" id="del-file" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">确认要删除文件吗? 删除之后无法恢复呦</h4>
+            </div>
+            <form  action="javascript:;" ajax-url='/file.php' class="form-validate" autocomplete="off">
+                <div class="modal-body">
+                    <input type="hidden" name="file_name">
+                    <input type="hidden" name="path" value="<?php echo $path; ?>">
+                    <input type="hidden" name="act" value="del_file">
+                    <button type="submit" class="btn btn-danger">确认删除</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                 </div>
             </form>
         </div>

@@ -30,6 +30,10 @@ switch ($data['act']) {
         $content = $file->renameFile($data);
         echo $content;
         break;
+    case 'del_file':
+        $content = $file->delFile($data);
+        echo $content;
+        break;
 
     default:
         # code...

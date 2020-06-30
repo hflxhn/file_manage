@@ -145,6 +145,16 @@ class File
         return $this->result(["/", 0, "重命名成功"]);
     }
 
+    // 删除文件名
+    public function delFile($data = [])
+    {
+        $del_file = unlink($data['path'] . $data['file_name']);
+        if (!$del_file) {
+            return $this->result(["error", 1, "文件删除失败"]);
+        }
+        return $this->result(["/", 0, "文件删除成功"]);
+    }
+
     // 验证文件名是否合法
     public function checkFileName($filename = '')
     {
