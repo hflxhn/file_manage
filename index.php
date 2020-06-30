@@ -50,6 +50,54 @@ $files = $file->getAllFiles($path);
                 <th>操作</th>
             </tr>
 <?php
+if ($files['dir']) {
+    foreach ($files['dir'] as $key => $value) {
+        $file_path = $path . '/' . $value;
+
+        $r = is_readable($file_path) ? 'r' : '-';
+        $w = is_writable($file_path) ? 'w' : '-';
+        $x = is_executable($file_path) ? 'x' : '-';
+
+        echo "<tr>";
+        echo "<td>" . $value . "</td>";
+        // echo "<td>" . filetype($file_path) . "</td>";
+        echo '<td><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></td>';
+        echo "<td>" . $file->dirSize($path) . "</td>";
+        echo "<td>" . $r . $w . $x . "</td>";
+        echo "<td>" . date("Y-m-d H:i:s", filectime($path)) . "</td>";
+        echo "<td>" . date("Y-m-d H:i:s", filemtime($path)) . "</td>";
+        echo "<td>" . date("Y-m-d H:i:s", fileatime($path)) . "</td>";
+        echo "<td>";
+        echo '
+            <div class="btn-group btn-group-xs" role="group">
+                <button type="button" data-act="show_content" data-path="' . $path . '" data-file-name="' . $value . '" class="btn btn-info" title="查看">
+                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                </button>
+                <button type="button" data-act="edit_content" data-path="' . $path . '" data-file-name="' . $value . '" class="btn btn-primary" title="修改">
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                </button>
+                <button type="button" data-act="rename_file" data-path="' . $path . '" data-file-name="' . $value . '" class="btn btn-warning" title="重命名">
+                    <span class="glyphicon glyphicon-object-align-bottom" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-info" title="复制">
+                    <span class="glyphicon glyphicon-copy" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-warning" title="剪贴">
+                    <span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>
+                </button>
+                <button type="button" data-act="del_file" data-path="' . $path . '" data-file-name="' . $value . '" class="btn btn-danger" title="删除">
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                </button>
+                <a href="file.php?act=down_file&path=' . $path . '&file_name=' . $value . '" class="btn btn-success" title="下载">
+                    <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+                </a>
+            </div>';
+        echo "</td>";
+
+        echo "</tr>";
+    }
+}
+
 if ($files['file']) {
     foreach ($files['file'] as $key => $value) {
         $file_path = $path . '/' . $value;
@@ -61,14 +109,14 @@ if ($files['file']) {
         echo "<tr>";
 
         echo "<td>" . $value . "</td>";
-        echo "<td>" . filetype($file_path) . "</td>";
+        // echo "<td>" . filetype($file_path) . "</td>";
+        echo '<td><span class="glyphicon glyphicon-file" aria-hidden="true"></span></td>';
         echo "<td>" . $file->transByte(filesize($file_path)) . "</td>";
         echo "<td>" . $r . $w . $x . "</td>";
         echo "<td>" . date("Y-m-d H:i:s", filectime($path)) . "</td>";
         echo "<td>" . date("Y-m-d H:i:s", filemtime($path)) . "</td>";
         echo "<td>" . date("Y-m-d H:i:s", fileatime($path)) . "</td>";
         echo "<td>";
-        // url="/file.php?act=show_content&path=' . $path . '&file_name=' . $value . '"
         echo '
         <div class="btn-group btn-group-xs" role="group">
             <button type="button" data-act="show_content" data-path="' . $path . '" data-file-name="' . $value . '" class="btn btn-info" title="查看">

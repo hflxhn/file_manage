@@ -101,10 +101,12 @@
                 new_file_name.value = '';
                 file_name.value = data.file_name;
                 $('#rename-file').modal('show');
+                break;
             case 'del_file':
                 var file_name = document.getElementsByName('file_name')[3];
                 file_name.value = data.file_name;
                 $('#del-file').modal('show');
+                break;
             
         }
         

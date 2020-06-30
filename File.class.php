@@ -6,6 +6,7 @@
 class File
 {
 
+    protected $file_size = 0;
     public function __construct()
     {}
 
@@ -71,6 +72,33 @@ class File
         }
 
         return round($size, 2) . " " . $arr[$tmp];
+    }
+
+    // 获取文件大小
+    public function dirSize($path)
+    {
+        $files = $this->getAllFiles($path);
+
+        $this->file_size += $this->totFileSize($path, $files['file']);
+
+        foreach ($files['dir'] as $key => $value) {
+            $this->dirSize($path . $value . '/');
+        }
+
+        return $this->transByte($this->file_size);
+    }
+
+    // 统计文件大小
+    protected function totFileSize($path, $files = [])
+    {
+        $file_size = 0;
+
+        if ($files) {
+            foreach ($files as $key => $value) {
+                $file_size += filesize($path . $value);
+            }
+        }
+        return $file_size;
     }
 
     // create file
@@ -182,7 +210,7 @@ class File
     }
 
     // 验证文件名是否合法
-    public function checkFileName($filename = '')
+    protected function checkFileName($filename = '')
     {
         $pattern = "/[\/,\*,<>,\?,\|]/";
         if (preg_match($pattern, $filename)) {
