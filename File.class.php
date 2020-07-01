@@ -6,7 +6,7 @@
 class File
 {
 
-    protected $file_size = 0;
+    public $file_size = 0;
     public function __construct()
     {}
 

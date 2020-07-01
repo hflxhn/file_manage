@@ -62,7 +62,8 @@ if ($files['dir']) {
         echo "<td>" . $value . "</td>";
         // echo "<td>" . filetype($file_path) . "</td>";
         echo '<td><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></td>';
-        echo "<td>" . $file->dirSize($path) . "</td>";
+        echo "<td>" . $file->dirSize($path . $value . '/') . "</td>";
+        $file->file_size = 0;
         echo "<td>" . $r . $w . $x . "</td>";
         echo "<td>" . date("Y-m-d H:i:s", filectime($path)) . "</td>";
         echo "<td>" . date("Y-m-d H:i:s", filemtime($path)) . "</td>";
