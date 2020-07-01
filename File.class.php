@@ -20,7 +20,13 @@ class File
     public function getAllFiles($path = '/')
     {
         // open fils
-        $handle = opendir($path);
+        @$handle = opendir($path);
+
+        if (!$handle) {
+            $arr['dir']  = [];
+            $arr['file'] = [];
+            return $arr;
+        }
 
         $arr = [];
         while (($item = readdir($handle)) !== false) {
