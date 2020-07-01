@@ -118,7 +118,7 @@ class File
         if (!touch($data['path'] . $data['file_name'])) {
             return $this->result(["error", 1, "文件名创建失败"]);
         }
-        return $this->result(["/", 0, "文件名创建成功"]);
+        return $this->result(["/index.php?path=" . $data['path'], 0, "文件名创建成功"]);
     }
 
     // 查看文件
@@ -152,7 +152,7 @@ class File
         if (!$result) {
             return $this->result(["error", 1, "文件修改失败"]);
         }
-        return $this->result(["/", 0, "文件修改成功"]);
+        return $this->result(["/index.php?path=" . $data['path'], 0, "文件修改成功"]);
     }
 
     // 重命名文件名
@@ -170,7 +170,7 @@ class File
         if (!$rename) {
             return $this->result(["error", 1, "重命名失败"]);
         }
-        return $this->result(["/", 0, "重命名成功"]);
+        return $this->result(["/index.php?path=" . $data['path'], 0, "重命名成功"]);
     }
 
     // 删除文件名
@@ -180,7 +180,7 @@ class File
         if (!$del_file) {
             return $this->result(["error", 1, "文件删除失败"]);
         }
-        return $this->result(["/", 0, "文件删除成功"]);
+        return $this->result(["/index.php?path=" . $data['path'], 0, "文件删除成功"]);
     }
 
     // 下载文件

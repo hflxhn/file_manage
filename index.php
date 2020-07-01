@@ -4,9 +4,22 @@ include 'File.class.php';
 
 $file = new File();
 
-$path  = 'file/';
+// $data = json_decode(file_get_contents('php://input'), true);
+// if (@array_key_exists('act', $data)) {
+//     $path = $data['path'] . $data['file_name'] . '/';
+// } else {
+//     $path = 'file/';
+// }
+$path = $_GET;
+$path = !array_key_exists('path', $path) ? 'file/' : $path['path'];
+
 $files = $file->getAllFiles($path);
 
+// back
+$back = dirname($path) . '/';
+if ($back == './') {
+    $back = "file/";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,9 +33,9 @@ $files = $file->getAllFiles($path);
         <h1 class='page-header'>在线文件管理系统</h1>
 
         <div class="btn-group" role="group">
-            <button type="button" class="btn btn-default" title="返回上一级">
+            <a href="/index.php?path=<?php echo $back; ?>" class="btn btn-default" title="返回上一级">
                 <span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>
-            </button>
+            </a>
             <button type="button" class="btn btn-default" title="新建文件" data-toggle="modal" data-target="#create-file">
                 <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
             </button>
@@ -32,9 +45,9 @@ $files = $file->getAllFiles($path);
             <button type="button" class="btn btn-default" title="上传文件">
                 <span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span>
             </button>
-            <button type="button" class="btn btn-default" title="上传文件">
+            <a href="/" class="btn btn-default" title="首页">
                 <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-            </button>
+            </a>
         </div>
         <hr>
 
@@ -69,23 +82,21 @@ if ($files['dir']) {
         echo "<td>" . date("Y-m-d H:i:s", filemtime($path)) . "</td>";
         echo "<td>" . date("Y-m-d H:i:s", fileatime($path)) . "</td>";
         echo "<td>";
+        //
         echo '
             <div class="btn-group btn-group-xs" role="group">
-                <button type="button" data-act="show_content" data-path="' . $path . '" data-file-name="' . $value . '" class="btn btn-info" title="查看">
+                <a href="index.php?path=' . $path . $value . '/' . '" data-act="file_path" data-path="' . $path . '" data-file-name="' . $value . '" class="btn btn-info" title="查看">
                     <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-                </button>
-                <button type="button" data-act="edit_content" data-path="' . $path . '" data-file-name="' . $value . '" class="btn btn-primary" title="修改">
-                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                </button>
+                </a>
                 <button type="button" data-act="rename_file" data-path="' . $path . '" data-file-name="' . $value . '" class="btn btn-warning" title="重命名">
                     <span class="glyphicon glyphicon-object-align-bottom" aria-hidden="true"></span>
                 </button>
-                <button type="button" class="btn btn-info" title="复制">
+                <!-- <button type="button" class="btn btn-info" title="复制">
                     <span class="glyphicon glyphicon-copy" aria-hidden="true"></span>
                 </button>
                 <button type="button" class="btn btn-warning" title="剪贴">
                     <span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>
-                </button>
+                </button>-->
                 <button type="button" data-act="del_file" data-path="' . $path . '" data-file-name="' . $value . '" class="btn btn-danger" title="删除">
                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                 </button>
@@ -129,12 +140,12 @@ if ($files['file']) {
             <button type="button" data-act="rename_file" data-path="' . $path . '" data-file-name="' . $value . '" class="btn btn-warning" title="重命名">
                 <span class="glyphicon glyphicon-object-align-bottom" aria-hidden="true"></span>
             </button>
-            <button type="button" class="btn btn-info" title="复制">
+            <!-- <button type="button" class="btn btn-info" title="复制">
                 <span class="glyphicon glyphicon-copy" aria-hidden="true"></span>
             </button>
             <button type="button" class="btn btn-warning" title="剪贴">
                 <span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>
-            </button>
+            </button>-->
             <button type="button" data-act="del_file" data-path="' . $path . '" data-file-name="' . $value . '" class="btn btn-danger" title="删除">
                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
             </button>

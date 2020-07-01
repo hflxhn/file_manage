@@ -107,6 +107,19 @@
                 file_name.value = data.file_name;
                 $('#del-file').modal('show');
                 break;
+            case 'file_path':
+                return loadData({
+                    url: '/index.php',
+                    success: function (result) {
+                        // if (result.code == 0) {
+                        
+                        // }else{
+                        //     layer.msg(result.msg, {icon: 2});
+                        // }
+                    },
+                    params: JSON.stringify(data)
+                });
+                break;
             
         }
         
