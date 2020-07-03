@@ -69,10 +69,15 @@
                 return loadData({
                     url: url,
                     success: function (result) {
+                        console.log(result)
                         if (result.code == 0) {
-                            var file_content = document.getElementsByClassName('file-content')[0];
-                            file_content.innerHTML = result.data;
-                            $('#show-content').modal('show');
+                            if (result.data.url) {
+                                window.location.href = result.data.url;
+                            }else{
+                                var file_content = document.getElementsByClassName('file-content')[0];
+                                file_content.innerHTML = result.data;
+                                $('#show-content').modal('show');
+                            }
                         }else{
                             layer.msg(result.msg, {icon: 2});
                         }

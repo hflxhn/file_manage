@@ -131,7 +131,24 @@ class File
     public function showContent($data = [])
     {
         $path_file_name = $data['path'] . $data['file_name'];
-        $content        = file_get_contents($path_file_name);
+
+        $ext = pathinfo($path_file_name, PATHINFO_EXTENSION);
+
+        $result = [
+            'file_path' => $path_file_name,
+            'url'       => 'video.php?path=' . $path_file_name,
+        ];
+
+        switch ($ext) {
+            case 'mp4':
+                return $this->result([$result, 0, "success"]);
+
+            default:
+                # code...
+                break;
+        }
+
+        $content = file_get_contents($path_file_name);
 
         if (!strlen($content)) {
             return $this->result(["error", 1, "该文件内容为空"]);
